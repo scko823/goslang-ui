@@ -16,8 +16,11 @@ export default {
     }
   },
   methods: {
-    onSubmit(){
-      alert(this.roomName)
+    onSubmit: function() {
+      window.roomsListener.send(JSON.stringify({
+        type: 'add',
+        name: this.roomName
+      }))
     }
   }
 }

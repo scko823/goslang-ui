@@ -14,11 +14,24 @@
 </template>
 
 <script>
+window.roomsListener = new WebSocket("ws://" + document.location.host + "/ws/rooms-listener")
+
 export default {
   name: 'navBar',
   data () {
     return {
       rooms: ['main']
+    }
+  },
+  mounted: function(){
+    const self = this
+    roomsListener.onmessage = function(evt){
+      let roomEvent = JSON.parse(event.data)
+      if (roomEvent.type === 'add'){
+        self.rooms = self.rooms.concat([roomEvent.name])
+      }else if (roomEvent.type === 'remove'){
+        self.rooms = [].concat(self.rooms).filter(function(name){return name !== roomEvent.name})
+      }
     }
   }
 }
