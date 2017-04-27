@@ -2,8 +2,7 @@
   <div class="nav-menu">
     <h2>Add A New Room</h2>
     <form @submit.prevent="onSubmit">
-      <input type="text" placeholder="room name" v-model="roomName">
-      </input>
+      <input type="text" placeholder="room name" v-model="roomName" />
     </form>
   </div>
 </template>
