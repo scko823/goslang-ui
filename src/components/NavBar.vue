@@ -6,7 +6,7 @@
         <router-link :to="{path: '/add-room'}">Make a new room</router-link>
       </li>
       <li v-for="room in rooms">
-        <router-link :to="{path: '/rooms/'+room}">Go to {{room}}</router-link>
+        <router-link :to="{path: '/room/'+room}">Go to {{room}}</router-link>
       </li>
     </ul>
     <router-view></router-view>

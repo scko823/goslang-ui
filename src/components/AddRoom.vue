@@ -21,6 +21,7 @@ export default {
         type: 'add',
         name: this.roomName
       }))
+      this.roomName = ''
     }
   }
 }
