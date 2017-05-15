@@ -18,6 +18,8 @@
 </template>
 
 <script>
+import {wsPrefix} from '../utils/config.js'
+
 export default {
   name: 'Room',
   data () {
@@ -39,8 +41,10 @@ export default {
     },
     _connectWS: function(){
       let self = this
-      console.log("Attempting to get new ws to room "+ $route.params.roomName)
-      window.messages = new WebSocket("ws://" + document.location.host + "/ws?room="+self.$route.params.roomName)
+      let myRoute = Object.assign({}, this.$route)
+      let roomName = myRoute.params.roomName
+      console.log("Attempting to get new ws to room "+ roomName)
+      window.messages = new WebSocket(wsPrefix()+"/ws?room="+roomName)
       window.messages.onopen = function(){
         self.disabled = false
         console.log("message websocket open")
@@ -53,14 +57,16 @@ export default {
   },
   mounted: function(){
     this._connectWS();
-    console.log('beforeMount')
+    console.log('mounted')
   },
   watch: {
     '$route.params.roomName':function(e){
       this.disabled=true
       this.messages=[]
       this.newMsgText=''
-      window.messages.close()
+      if (window.messages){
+        window.messages.close()
+      }
       this._connectWS()
     }
   }

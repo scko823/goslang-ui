@@ -14,7 +14,8 @@
 </template>
 
 <script>
-window.roomsListener = new WebSocket("ws://" + document.location.host + "/ws/rooms-listener")
+import {wsPrefix} from '../utils/config.js'
+window.roomsListener = new WebSocket(wsPrefix()+"/ws/rooms-listener")
 
 export default {
   name: 'navBar',
@@ -33,7 +34,17 @@ export default {
         self.rooms = [].concat(self.rooms).filter(function(name){return name !== roomEvent.name})
       }
     }
-  }
+  },
+  // watch: {
+  //   '$route': function(to, from){
+  //     if (from.params.roomName){
+  //       window.message = undefined
+  //     }
+  //     if (to.params.roomName){
+  //       window.message = new WebSocket(wsPrefix()+ "/ws?room="+ $route.params.roomName)
+  //     }
+  //   }
+  // }
 }
 </script>
 
