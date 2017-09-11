@@ -30,5 +30,10 @@ pipeline {
                 }
             }
         }
+        stage ('Archive') {
+            steps {
+                archiveArtifacts artifacts: 'assets.zip', fingerprint: true
+            }
+        }
     }
 }
