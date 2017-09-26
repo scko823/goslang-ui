@@ -5,10 +5,11 @@
   "author": "Sin Cheung Ko <scko823@gmail.com>",
   "private": true,
   "scripts": {
-    "preinstall": "rimraf assets/",
+    "postinstall": "rimraf assets/",
     "dev": "node build/dev-server.js",
     "start": "node build/dev-server.js",
-    "build": "node build/build.js"
+    "build": "node build/build.js",
+    "test": "echo 'no test yet'"
   },
   "dependencies": {
     "vue": "^2.2.6",
