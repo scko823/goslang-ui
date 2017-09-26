@@ -30,9 +30,9 @@ pipeline {
                 }
             }
         }
-        stage ('Archive') {
+        stage ('Downstream') {
             steps {
-                archiveArtifacts artifacts: 'assets.zip', fingerprint: true
+                build job: 'goslang-backend pipeline', wait: false, parameters: [[$class: 'FileParameterValue', name: 'target', value: 'assets.zip']]
             }
         }
     }
